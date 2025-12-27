@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f0f2f5;
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+}
+
+.resume-container {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  margin: 20px auto;
+  padding: 5mm 20mm 25mm 20mm;
+  /* top, right, bottom, left */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Styles applied during PDF generation */
+.resume-container.printing {
+  margin: 0;
+  box-shadow: none;
+  border: none;
+}
+
+.resume-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #000;
+  margin-bottom: 20px;
+}
+
+.resume-table th,
+.resume-table td {
+  border: 1px solid #000;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  line-height: 2;
+  height: 25px;
+  padding-bottom: 15px;
+}
+
+.resume-table td {
+  vertical-align: middle;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.resume-table th {
+  background-color: #f3f4f6;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-bottom: 5px;
+}
+
+.resume-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.resume-title span {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 10px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .resume-container {
+    margin: 0;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
