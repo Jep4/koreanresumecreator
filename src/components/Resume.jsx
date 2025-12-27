@@ -84,7 +84,7 @@ const Resume = ({ resumeRef, isPrinting }) => {
 
     return (
         <div className="resume-container" ref={resumeRef}>
-            <h1 className="resume-title"><span>이 력 서</span></h1>
+            <h2 className="resume-title"><span>이 력 서</span></h2>
 
             <table className="resume-table">
                 <colgroup>

@@ -83,14 +83,14 @@ function App() {
                 </div>
             </div>
 
-            <div className="container mx-auto">
+            <main className="container mx-auto">
                 <div className="text-center mb-8 no-print">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-2">이력서 생성기</h1>
-                    <p className="text-gray-600">이력서 템플릿입니다 그놈의 자유양식이력서</p>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-2">무료 온라인 이력서 생성기</h1>
+                    <p className="text-gray-600">이력서 템플릿입니다 - 로그인 없이 바로 PDF로 저장하세요</p>
                 </div>
 
                 <Resume resumeRef={resumeRef} isPrinting={isPrinting} />
-            </div>
+            </main>
         </div>
     );
 }
