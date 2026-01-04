@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import EditableField from './EditableField';
 import PhotoUpload from './PhotoUpload';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Resume = ({ resumeRef, isPrinting }) => {
+    const { t } = useLanguage();
     const [data, setData] = useState({
         name: '',
         birthDate: '',
@@ -84,7 +86,7 @@ const Resume = ({ resumeRef, isPrinting }) => {
 
     return (
         <div className="resume-container" ref={resumeRef}>
-            <h2 className="resume-title"><span>이 력 서</span></h2>
+            <h2 className="resume-title"><span>{t.resume.title}</span></h2>
 
             <table className="resume-table">
                 <colgroup>
@@ -99,58 +101,58 @@ const Resume = ({ resumeRef, isPrinting }) => {
                         <td rowSpan="4" className="p-0 h-32">
                             <PhotoUpload />
                         </td>
-                        <th>성 명</th>
+                        <th>{t.resume.name}</th>
                         <td colSpan="3">
                             <EditableField
                                 value={data.name}
                                 onSave={(val) => updateField('name', val)}
-                                placeholder="홍길동"
+                                placeholder={t.placeholders.name}
                                 className="text-center text-lg font-bold h-full mb-1"
                                 isPrinting={isPrinting}
                             />
                         </td>
                     </tr>
                     <tr>
-                        <th>생년월일</th>
+                        <th>{t.resume.birthDateLabel}</th>
                         <td colSpan="3">
                             <EditableField
                                 value={data.birthDate}
                                 onSave={(val) => updateField('birthDate', val)}
-                                placeholder="1990년 1월 1일"
+                                placeholder={t.placeholders.birthDate}
                                 className="text-center h-full mb-1"
                                 isPrinting={isPrinting}
                             />
                         </td>
                     </tr>
                     <tr>
-                        <th>이메일</th>
+                        <th>{t.resume.email}</th>
                         <td colSpan="3">
                             <EditableField
                                 value={data.email}
                                 onSave={(val) => updateField('email', val)}
-                                placeholder="example@email.com"
+                                placeholder={t.placeholders.email}
                                 className="text-center h-full mb-1"
                                 isPrinting={isPrinting}
                             />
                         </td>
                     </tr>
                     <tr>
-                        <th>연락처</th>
+                        <th>{t.resume.phone}</th>
                         <td>
                             <EditableField
                                 value={data.phone}
                                 onSave={(val) => updateField('phone', val)}
-                                placeholder="010-1234-5678"
+                                placeholder={t.placeholders.phone}
                                 className="text-center h-full mb-1"
                                 isPrinting={isPrinting}
                             />
                         </td>
-                        <th>주소</th>
+                        <th>{t.resume.address}</th>
                         <td>
                             <EditableField
                                 value={data.address}
                                 onSave={(val) => updateField('address', val)}
-                                placeholder="서울시 강남구..."
+                                placeholder={t.placeholders.address}
                                 className="text-left h-full mb-1"
                                 isPrinting={isPrinting}
                             />
@@ -160,38 +162,38 @@ const Resume = ({ resumeRef, isPrinting }) => {
             </table>
 
             {renderSection(
-                '학력사항',
+                t.resume.education,
                 'education',
-                ['재학기간', '학교명', '전공', '구분'],
+                t.headers.education,
                 ['period', 'school', 'major', 'status'],
                 ['25%', '30%', '30%', '15%']
             )}
 
             {renderSection(
-                '경력사항',
+                t.resume.experience,
                 'experience',
-                ['근무기간', '회사명', '직위', '담당업무'],
+                t.headers.experience,
                 ['period', 'company', 'role', 'task'],
                 ['25%', '25%', '15%', '35%']
             )}
 
             {renderSection(
-                '자격증 및 어학',
+                t.resume.certificates,
                 'license',
-                ['취득일', '자격증/어학명', '발행처'],
+                t.headers.certificates,
                 ['date', 'name', 'issuer'],
                 ['25%', '40%', '35%']
             )}
 
             {(!isPrinting || hasContent('introduction')) && (
                 <>
-                    <h2 className="text-lg font-bold mb-2 mt-6 border-b-2 border-black pb-1">자기소개서</h2>
+                    <h2 className="text-lg font-bold mb-2 mt-6 border-b-2 border-black pb-1">{t.resume.introduction}</h2>
                     <div className="border-2 border-black p-4 min-h-[200px]">
                         <EditableField
                             value={data.introduction}
                             onSave={(val) => updateField('introduction', val)}
                             type="textarea"
-                            placeholder="자유롭게 본인을 소개해주세요."
+                            placeholder={t.placeholders.introduction}
                             className="w-full h-full min-h-[200px] resize-none"
                             isPrinting={isPrinting}
                         />
@@ -200,20 +202,20 @@ const Resume = ({ resumeRef, isPrinting }) => {
             )}
 
             <div className="mt-10 text-center">
-                <p className="mb-4">위 기재 사항은 사실과 틀림없습니다.</p>
-                <p className="font-bold text-lg">{new Date().getFullYear()}년 {new Date().getMonth() + 1}월 {new Date().getDate()}일</p>
+                <p className="mb-4">{t.resume.certify}</p>
+                <p className="font-bold text-lg">{new Date().getFullYear()}. {new Date().getMonth() + 1}. {new Date().getDate()}.</p>
                 <div className="mt-4 flex justify-center items-end gap-2">
-                    <span className="font-bold text-xl pb-1">작성자 : </span>
+                    <span className="font-bold text-xl pb-1">{t.resume.author}</span>
                     <div className="w-32 border-b border-black">
                         <EditableField
                             value={data.name}
                             onSave={(val) => updateField('name', val)}
-                            placeholder="홍길동"
+                            placeholder={t.placeholders.name}
                             className="text-center font-bold text-xl mb-2"
                             isPrinting={isPrinting}
                         />
                     </div>
-                    <span className="font-bold text-xl pb-1">(인)</span>
+                    <span className="font-bold text-xl pb-1">{t.resume.signature}</span>
                 </div>
             </div>
         </div>

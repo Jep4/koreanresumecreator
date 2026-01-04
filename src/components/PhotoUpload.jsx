@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const PhotoUpload = () => {
     const [photo, setPhoto] = useState(null);
     const fileInputRef = useRef(null);
+    const { t } = useLanguage();
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -23,7 +25,7 @@ const PhotoUpload = () => {
         <div
             className="w-full h-full flex items-center justify-center cursor-pointer hover:bg-gray-100 overflow-hidden relative"
             onClick={handleClick}
-            title="Click to upload photo"
+            title={t.language === 'en' ? "Click to upload photo" : "사진을 업로드하려면 클릭하세요"}
         >
             <input
                 type="file"
@@ -36,8 +38,8 @@ const PhotoUpload = () => {
                 <img src={photo} alt="Resume Photo" className="w-full h-full object-cover" />
             ) : (
                 <div className="text-center text-gray-400 text-sm">
-                    <p>사진</p>
-                    <p>(3x4)</p>
+                    <p>{t.resume.photoPlaceholder}</p>
+                    <p>{t.resume.photoSize}</p>
                 </div>
             )}
         </div>
